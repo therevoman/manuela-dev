@@ -131,7 +131,7 @@ async function check_anomaly(id, value) {
         
         if (l.length == episode_length) {
 
-            var edgeAnomaly = { "data": { "ndarray": [l] }};
+            var edgeAnomaly = { "data": { "ndarray": [l] },"meta":{"device_metric":id}};
                 
             try {
                 console.log('*AD* ID: %s,  Val: %d', id, value );
@@ -190,11 +190,11 @@ function handleTemperature(message) {
     // - Somebody added an unnecessary Celsius in Fahrenheit conversion
     // - Fix it by commenting out the conversion from Celsius in Fahrenheit:
 
-    /*
+    
     var modifiedValue = (Number(elements[2]) * 9/5) + 32;
     var newData = data.replace(elements[2], modifiedValue);
     message = Buffer.from(newData, 'utf8');
-   */
+   
   
     io.sockets.emit("temperature-event", message);
 
